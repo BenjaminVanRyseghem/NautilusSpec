@@ -3,7 +3,7 @@ authors:
 - |
     Roberto Minelli\
     Benjamin Van Ryseghem
-title: A user interaction based system browser
+title: An user interaction based system browser
 ...
 
 Introduction
