@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 \begin{document}
 
-\title{An user interaction based system browser}
+\title{An User Interaction Aware System Browser}
 \author{Roberto Minelli\\Benjamin Van Ryseghem}
 %\date{}
 \maketitle
@@ -22,6 +22,26 @@ as close as the user interactions as possible.
 The goal is to simplify the usage of the system browser which is the back bone tool of the system. 
 To achieve this goal we would like to have a new system browser that can dynamically change the way information are presented in order to ease its usage for each user.
 
+
+\section{The current system browser}
+
+The current system browser looks the same since the early ages of Smalltalk even if multiple implementation has existed.
+It is horizontally split in two part:
+\begin{itemize}
+	\item the top most panel to navigate through the system;
+	\item the bottom most panel where the source code is displayed and can be edited.
+\end{itemize}
+
+The top most panel is itself split in four columns representing the levels of Smalltalk entities.
+From the left hand colin to the right hand column there are:
+\begin{itemize}
+	\item the packages list, including all the packages of the system
+	\item the classes list of the selected package
+	\item the protocols list of the current selected class
+	\item the methods list of the current selected protocol
+\end{itemize}
+
+
 \section{Challenges}
 
 Several challenges need to be faced in order to reach our goals.
@@ -39,6 +59,8 @@ Also some actions could occur only if multiple interactions categories are activ
 The last challenge will be to validate the actions.
 Indeed it may be difficult to find a pertinent action for every user.
 Then only a statistic approach mixed with tests on a sample group can lead to a generic enough solution.
+
+
 
 \end{document}
 
