@@ -1,5 +1,25 @@
 \documentclass[12pt]{article}
 \input{macro.tex}
+
+\usepackage{fancyvrb}    
+\usepackage{xspace}
+\usepackage{float}
+
+\newcommand{\dflow}{DFlow\xspace}
+\newfloat{codefloat}{thp}{lop}
+\floatname{codefloat}{Code}
+
+\newenvironment{code}[2][]%
+{\VerbatimEnvironment
+\begin{codefloat}%
+\caption{#2}
+\label{code:#1}
+\begin{Verbatim}[frame=leftline, tabsize=4, samepage=true]}
+{\end{Verbatim}%
+\end{codefloat}}
+
+\newcommand{\coderef}[1]{Code~\ref{code:#1}}
+
 \begin{document}
 
 \title{An User Interaction Aware System Browser}
@@ -17,7 +37,7 @@ But so far this implementations were based on some extensions that the user, who
 
 We would like to reimplement Nautilus (the current Pharo system browser) using Spec.
 This new framework provides the possibility to dynamically change the user interface.
-Such a feature combined with the ability to collect user interaction data provided by DFlow will be used to make the system browser 
+Such a feature combined with the ability to collect user interaction data provided by \dflow will be used to make the system browser 
 as close as the user interactions as possible.
 
 The goal is to simplify the usage of the system browser which is the back bone tool of the system. 
@@ -36,16 +56,16 @@ It is horizontally split in two part:
 The top most panel is itself split in four columns representing the levels of Smalltalk entities.
 From the left hand colin to the right hand column there are:
 \begin{itemize}
-	\item the packages list, including all the packages of the system
-	\item the classes list of the selected package
-	\item the protocols list of the current selected class
-	\item the methods list of the current selected protocol
+	\item the packages list, including all the packages of the system;
+	\item the classes list of the selected package;
+	\item the protocols list of the current selected class;
+	\item the methods list of the current selected protocol.
 \end{itemize}
 
 An example a such a layout can be found in the current Pharo system browser, Nautilus as shown on \figref{nautilus}.
 \begin{figure}[ht]
 \begin{center}
-     \includegraphics[width=15cm]{figures/Nautilus}
+     \includegraphics[width=15cm]{figures/Nautilus.png}
 \end{center}
      \caption{Pharo system browser: Nautilus}
      \figlabel{nautilus}
@@ -54,6 +74,56 @@ An example a such a layout can be found in the current Pharo system browser, Nau
 The layout itself of the system browser forces the users to accommodate to a strictly defined workflow.
 In the latests implementations of the system browser (OmniBrowser or Nautilus) few mechanism has been introduced to try to tackle this lack of flexibility.
 But so far, those solutions (plugins, preferences) either require internal knowledge from the user or are still static in the sense that the changes are made once and for all.
+
+Another limitation of the current implementation of the system browser is that its made fully using Morphic which only few Smalltalkers know.
+Due to this, it is complicated for a regular user to even change the simplest Nautilus behaviour.
+
+\section{Spec}
+
+Spec is a new framework in Pharo used to easily build and reuse widgets and applications.
+Contrary to Morphic, Spec is fully event based, providing an easier to understand workflow.
+It also provide a syntax that is closer to a natural event workflow, making coding application simplier.
+
+In addition, Spec provides a dynamic way to build widgets which leads to the capability for the developer to change the widget layout or sub widgets on the fly.
+Even if this can be done in plain Morphic, it is often a tedious task where in Spec it is completely seamless for the user.
+Spec supports the addition and removal of sub-widgets on the fly providing user more flexibility.
+
+Spec also propose a simple layout management with multiple convenient methods bridging the gap in Morphic where layouts are complex.
+The code sample \coderef{spec} and the code sample \coderef{morphic} represent the creation of the similar widgets.
+If the result is similar it appeared that the Spec version is understood more readily than the Morphic equivalent.
+
+\begin{code}[spec]{Spec widget layoutting}
+MySpecExample>>#defaultSpec
+
+^ SpecLayout composed
+	newColumn: [ :column |
+		column 
+			add: #top height: 26;
+			add: #middle;
+			add: #bottom height: 26
+	];
+	yourself
+\end{code}
+
+\begin{code}[morphic]{Morphic widget layoutting}
+MyMorphicExample>>#buildWidget
+
+^ PanelMorph new
+	changeProportionalLayout;
+	addMorph: self top 
+	fullFrame: (LayoutFrame identity
+		bottomFraction: 0;
+		bottomOffset: 26);
+	addMorph: self middle
+	fullFrame: (LayoutFrame identity
+		topOffset: 26;
+		bottomOffset: -26);
+	addMorph: self top 
+	fullFrame: (LayoutFrame identity
+		topFraction: 1;
+		topOffset: -26);
+	yourself
+\end{code}
 
 \section{Challenges}
 
