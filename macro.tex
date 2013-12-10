@@ -1,0 +1,83 @@
+\include{amsymb}
+\include{marvosym}
+
+\usepackage[cyr]{aeguill}
+\usepackage[applemac]{inputenc}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage[a4paper]{geometry}
+\usepackage{latexsym,amsmath,amssymb,textcomp}
+\usepackage{moreverb}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{titling}
+\usepackage{mathabx}
+
+\usepackage{pdfpages}
+
+\usepackage{hyperref}
+
+
+\newlength{\indentationnota}
+\newlength{\largeurlignenota}
+\newlength{\paddingnota}
+\newlength{\largeurnota}
+\setlength{\paddingnota}{5pt}
+\setlength{\largeurnota}{0.9cm}
+
+\definecolor{pink}{rgb}{1,0.5,1}
+\makeatletter
+
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\figlabel}[1]{\label{fig:#1}}
+
+\newenvironment{pictonote}[1]{% on passe le nom du ﬁchier en argument
+\begin{list}{}{%
+\setlength{\labelsep}{0pt}%
+\setlength{\rightmargin}{15pt}%
+\setlength{\paddingnota}{5pt}}
+\item%
+\setlength{\indentationnota}{%
+\@totalleftmargin+\largeurnota+\paddingnota}%
+\setlength{\largeurlignenota}{%
+\linewidth-\largeurnota-\paddingnota}%
+\parshape=3%
+\indentationnota\largeurlignenota%
+\indentationnota\largeurlignenota%
+\@totalleftmargin\linewidth%
+\raisebox{-\largeurnota+2.2ex}[0pt][0pt]{%
+\makebox[0pt][r]{%
+\includegraphics[width=\largeurnota]{#1}%
+\hspace{\paddingnota}}}%
+\ignorespaces}{%
+\end{list}}
+
+\makeatother
+
+\newenvironment{attention}%
+{\begin{pictonote}{/Users/benjamin/Documents/Education/LaTeX/danger}}%
+{\end{pictonote}}
+
+\newenvironment{unicorn}%
+{\begin{pictonote}{/Users/benjamin/Documents/Education/LaTeX/angry_unicorn}}%
+{\end{pictonote}}
+
+\newcommand\unicornbox[1]{\colorbox{pink}{\color{white}{#1}}}
+
+\newcommand\cf{\emph{c.f}}
+
+\newcommand\signature{%
+\begin{figure}[br]
+	\begin{flushright}
+	\begin{minipage}{8cm}
+		\begin{center}
+		\reflectbox{\includegraphics[width=8cm]{/Users/benjamin/Documents/Education/LaTeX/unicorn}}\\
+		\theauthor
+		\end{center}
+	\end{minipage}
+	\end{flushright}
+\end{figure}}
+
+\newcommand\danger{\raisebox{-0.4ex}{\LARGE $\triangle$ \normalsize} \hspace{-4.1ex}! \hspace{1ex}}
+\newcommand\PL{Programmation Logique\xspace}
+\newcommand\pl{\bsc{Prolog}\xspace}

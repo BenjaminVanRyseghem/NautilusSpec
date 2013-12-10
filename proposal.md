@@ -3,7 +3,7 @@ authors:
 - |
     Roberto Minelli\
     Benjamin Van Ryseghem
-title: An user interaction based system browser
+title: An User Interaction Aware System Browser
 ...
 
 Introduction
@@ -23,13 +23,52 @@ a coder, can add by implementing new behaviours.
 We would like to reimplement Nautilus (the current Pharo system browser)
 using Spec. This new framework provides the possibility to dynamically
 change the user interface. Such a feature combined with the ability to
-collect user interaction data provided by D-Flow will be used to make
-the system browser as close as the user interactions as possible.
+collect user interaction data provided by DFlow will be used to make the
+system browser as close as the user interactions as possible.
 
 The goal is to simplify the usage of the system browser which is the
 back bone tool of the system. To achieve this goal we would like to have
 a new system browser that can dynamically change the way information are
 presented in order to ease its usage for each user.
+
+The current system browser
+==========================
+
+The current system browser looks the same since the early ages of
+Smalltalk even if multiple implementation has existed. It is
+horizontally split in two part:
+
+-   the top most panel to navigate through the system;
+
+-   the bottom most panel where the source code is displayed and can be
+    edited.
+
+The top most panel is itself split in four columns representing the
+levels of Smalltalk entities. From the left hand colin to the right hand
+column there are:
+
+-   the packages list, including all the packages of the system
+
+-   the classes list of the selected package
+
+-   the protocols list of the current selected class
+
+-   the methods list of the current selected protocol
+
+An example a such a layout can be found in the current Pharo system
+browser, Nautilus as shown on Figure [fig:nautilus].
+
+![image](figures/Nautilus)
+
+[fig:nautilus]
+
+The layout itself of the system browser forces the users to accommodate
+to a strictly defined workflow. In the latests implementations of the
+system browser (OmniBrowser or Nautilus) few mechanism has been
+introduced to try to tackle this lack of flexibility. But so far, those
+solutions (plugins, preferences) either require internal knowledge from
+the user or are still static in the sense that the changes are made once
+and for all.
 
 Challenges
 ==========

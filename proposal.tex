@@ -1,4 +1,5 @@
 \documentclass[12pt]{article}
+\input{macro.tex}
 \begin{document}
 
 \title{An User Interaction Aware System Browser}
@@ -16,7 +17,7 @@ But so far this implementations were based on some extensions that the user, who
 
 We would like to reimplement Nautilus (the current Pharo system browser) using Spec.
 This new framework provides the possibility to dynamically change the user interface.
-Such a feature combined with the ability to collect user interaction data provided by D-Flow will be used to make the system browser 
+Such a feature combined with the ability to collect user interaction data provided by DFlow will be used to make the system browser 
 as close as the user interactions as possible.
 
 The goal is to simplify the usage of the system browser which is the back bone tool of the system. 
@@ -41,6 +42,18 @@ From the left hand colin to the right hand column there are:
 	\item the methods list of the current selected protocol
 \end{itemize}
 
+An example a such a layout can be found in the current Pharo system browser, Nautilus as shown on \figref{nautilus}.
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[width=15cm]{figures/Nautilus}
+\end{center}
+     \caption{Pharo system browser: Nautilus}
+     \figlabel{nautilus}
+\end{figure}
+
+The layout itself of the system browser forces the users to accommodate to a strictly defined workflow.
+In the latests implementations of the system browser (OmniBrowser or Nautilus) few mechanism has been introduced to try to tackle this lack of flexibility.
+But so far, those solutions (plugins, preferences) either require internal knowledge from the user or are still static in the sense that the changes are made once and for all.
 
 \section{Challenges}
 
